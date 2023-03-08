@@ -1,7 +1,10 @@
 import {Component} from 'react';
+
 import Balance from '../Balance';
 import Transactions from '../Transactions';
 import Form from '../Form';
+
+import { GlobalStyle, Wrapper } from './style';
 
 let id = 0;
 class App extends Component {
@@ -9,7 +12,8 @@ class App extends Component {
         super();
         this.state = {
             balance: 0,
-            transactions: []
+            transactions: [],
+            id: ++id
         }
 
         // this.onChange = this.onChange.bind(this)
@@ -24,12 +28,13 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <Wrapper>
+                <GlobalStyle/>
                 <Balance balance={this.state.balance}/>
                 <Form onChange={this.onChange}/>
                 <hr/>
                 <Transactions transactions={this.state.transactions}/>
-            </div>
+            </Wrapper>
         )
     }
 }

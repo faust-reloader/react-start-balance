@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 
 class Form extends Component {
     constructor(){
@@ -13,10 +14,13 @@ class Form extends Component {
         e.preventDefault();
 
         this.props.onChange(this.state.value);
+        this.setState({
+            value: ''
+        })
     }
 
     onChange = (e) => {
-        const { value } = e.target.value;
+        // const { value } = e.target.value;
 
         this.setState({
             value: e.target.value
@@ -34,6 +38,10 @@ class Form extends Component {
         </form>
         )
     }
+}
+
+Form.propTypes = {
+    onChange: PropTypes.func
 }
 
 export default Form;
