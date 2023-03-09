@@ -1,42 +1,47 @@
-import {Component} from 'react';
+import { Wrapper, GlobalStyle } from './style';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link 
+    } from 'react-router-dom';
 
-import Balance from '../Balance';
-import Transactions from '../Transactions';
-import Form from '../Form';
+import Home from '../Home';
+import About from '../About';
+import Statistics from '../Statistics';
 
-import { GlobalStyle, Wrapper } from './style';
-
-let id = 0;
-class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            balance: 0,
-            transactions: [],
-            id: ++id
-        }
-
-        // this.onChange = this.onChange.bind(this)
-    }
-
-    onChange = (value) => {
-        this.setState((state) => ({
-            balance: state.balance + Number(value),
-            transactions: [{value, label: 'change'}, ...state.transactions]
-        }))
-    }
-
-    render() {
-        return (
+const App = () => {
+    return (
+      <Router>
             <Wrapper>
-                <GlobalStyle/>
-                <Balance balance={this.state.balance}/>
-                <Form onChange={this.onChange}/>
-                <hr/>
-                <Transactions transactions={this.state.transactions}/>
+             <GlobalStyle/>
+               <nav>
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/statistics">Statistics</Link>
+                        </li>
+                        <li>
+                            <Link to="/about">About</Link>
+                        </li>
+                    </ul>
+                </nav>
+                <Switch>
+                    <Route path="/about">
+                        <About/>
+                    </Route>
+                    <Route path="/statistics">
+                        <Statistics/>
+                    </Route>
+                    <Route path="/">
+                        <Home/>
+                    </Route>
+                </Switch>
             </Wrapper>
-        )
-    }
+      </Router>
+    )
 }
 
 export default App;
